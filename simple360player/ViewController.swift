@@ -58,6 +58,7 @@ class ViewController: UIViewController, SCNSceneRendererDelegate, UIGestureRecog
         let camY = 0.0 as Float
         let camZ = 0.0 as Float
         let zFar = 50.0
+        let fov = 85.0 as Double
         
         let leftCamera = SCNCamera()
         let rightCamera = SCNCamera()
@@ -65,9 +66,18 @@ class ViewController: UIViewController, SCNSceneRendererDelegate, UIGestureRecog
         leftCamera.zFar = zFar
         rightCamera.zFar = zFar
         
+        leftCamera.xFov = fov
+        leftCamera.yFov = fov
+        
+        rightCamera.xFov = fov
+        rightCamera.yFov = fov
+        
+        
         let leftCameraNode = SCNNode()
+        
         leftCameraNode.camera = leftCamera
         leftCameraNode.position = SCNVector3(x: camX - 0.5, y: camY, z: camZ)
+        
         
         let rightCameraNode = SCNNode()
         rightCameraNode.camera = rightCamera
@@ -146,6 +156,12 @@ class ViewController: UIViewController, SCNSceneRendererDelegate, UIGestureRecog
     func play(){
         
         //let fileURL: NSURL? = NSURL(string: "http://www.kolor.com/360-videos-files/noa-neal-graffiti-360-music-video-full-hd.mp4")
+        /*
+        // YouTube test. Url will probably expire
+        let fileURL: NSURL? = NSURL(string: "http://redirector.googlevideo.com/videoplayback?ms=au&mv=m&source=youtube&pl=40&dur=493.540&lmt=1456607770068428&ip=2a03%3A8180%3A1001%3A16a%3A%3A8ee1&id=o-AJYCPGKGSoU_OQ-aJ9-E_ZWedRG9qhI_XXWeO1STs0eB&mn=sn-q4f7snes&mm=31&sver=3&mt=1456678217&signature=9D99DC25271134DFBE20D18760632214BFBFBA8C.E4117D20269ABE6434D28F46DF706CCAC04EB37A&ratebypass=yes&itag=22&mime=video%2Fmp4&initcwndbps=72500&fexp=9405191%2C9407610%2C9408210%2C9408522%2C9416126%2C9418200%2C9419451%2C9420452%2C9422342%2C9422571%2C9422596%2C9423661%2C9423662%2C9427317%2C9427365%2C9427850%2C9428320%2C9429504%2C9429585&ipbits=0&nh=IgpwcjA1LmRmdzA2KgkxMjcuMC4wLjE&key=yt6&upn=MrHDZ1PtB9Y&gcr=us&expire=1456699917&sparams=dur%2Cgcr%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cnh%2Cpl%2Cratebypass%2Csource%2Cupn%2Cexpire&title=Bristol+Clifton+Drive+360")
+        */
+        
+        
         let fileURL: NSURL? = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("vr", ofType: "mp4")!)
         
         if (fileURL != nil){
