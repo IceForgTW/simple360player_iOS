@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  simple360player
-//
-//  Created by Arthur Swiniarski on 04/01/16.
-//  Copyright © 2016 Arthur Swiniarski. All rights reserved.
-//
 
 import UIKit
 import SceneKit
@@ -124,7 +117,7 @@ class ViewController: UIViewController, SCNSceneRendererDelegate, UIGestureRecog
         
         play()
     }
-
+    
     
     //MARK: Camera Orientation methods
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -191,8 +184,28 @@ class ViewController: UIViewController, SCNSceneRendererDelegate, UIGestureRecog
                 })
             
             playPausePlayer()
+            
+            NSNotificationCenter.defaultCenter().addObserver(self,
+                selector: "loopVideo",
+                name: AVPlayerItemDidPlayToEndTimeNotification,
+                object: player?.currentItem
+            )
+            
+            
         }
     }
+    
+    func loopVideo()  {
+        
+        player!.pause()
+        
+        let seconds : Int64 = 0
+        let preferredTimeScale : Int32 = 1
+        let seekTime : CMTime = CMTimeMake(seconds, preferredTimeScale)
+        player!.seekToTime(seekTime)
+        player!.play()
+    }
+    
     
     func stopPlay(){
         
@@ -342,4 +355,3 @@ class ViewController: UIViewController, SCNSceneRendererDelegate, UIGestureRecog
         // Dispose of any resources that can be recreated.
     }
 }
-
